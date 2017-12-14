@@ -1,11 +1,17 @@
 def problem_2():
     data = open('2/input_2.txt', 'r')
-    result = 0
+    result1 = 0
+    result2 = 0
     for line in data:
         #print(line.split())
-        result += minmax_difference(line.split())
+        result1 += minmax_difference(line.split())
 
-    return result
+    data.close()
+    data = open('2/input_2.txt', 'r')
+    for line in data:
+        result2 += devision(line.split())
+
+    return result1, result2
 
 def minmax_difference(numbers):
     #print(numbers[0])
@@ -18,4 +24,15 @@ def minmax_difference(numbers):
             max_num = int(num)
     return max_num - min_num
 
+def devision(numbers):
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            if int(numbers[i]) // int(numbers[j]) == int(numbers[i]) / int(numbers[j]):
+                #print('1', int(numbers[i]) // int(numbers[j]))
+                return int(numbers[i]) // int(numbers[j])
+            elif int(numbers[j]) // int(numbers[i]) == int(numbers[j]) / int(numbers[i]):
+                #print('2', int(numbers[j]) // int(numbers[i]))
+                return int(numbers[j]) // int(numbers[i])
+
+    print('Bad line.')
 print(problem_2())
